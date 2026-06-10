@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabomnim LLC | AI Consulting Solutions</title>
+  <meta name="description" content="Sabomnim LLC provides expert AI consulting services — strategy, machine learning, automation, and data analytics to transform your business.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg:      #060b18;
+      --bg2:     #0d1529;
+      --bg3:     #0a1020;
+      --cyan:    #00d4ff;
+      --indigo:  #6366f1;
+      --green:   #10b981;
+      --text:    #f1f5f9;
+      --muted:   #64748b;
+      --card:    rgba(255,255,255,0.04);
+      --border:  rgba(255,255,255,0.08);
+      --grad:    linear-gradient(135deg, #00d4ff, #6366f1);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 3rem;
+      background: rgba(6,11,24,0.7); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 800;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--grad) !important; color: white !important;
+      padding: 0.55rem 1.4rem !important; border-radius: 8px; font-weight: 600 !important;
+      box-shadow: 0 0 20px rgba(0,212,255,0.25);
+    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 7rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(0,212,255,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(99,102,241,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 50% 100%, rgba(99,102,241,0.08) 0%, transparent 70%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .hero-content { position: relative; max-width: 900px; animation: fadeUp 0.8s ease; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25);
+      color: var(--cyan); padding: 0.4rem 1.1rem; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.03em; margin-bottom: 2rem;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 800;
+      line-height: 1.1; margin-bottom: 1.5rem;
+    }
+    .grad-text {
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted);
+      max-width: 680px; margin: 0 auto 2.5rem; line-height: 1.75;
+    }
+    .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-p {
+      background: var(--grad); color: white; padding: 0.85rem 2rem; border-radius: 10px;
+      text-decoration: none; font-weight: 700; font-size: 0.95rem;
+      transition: all 0.3s; box-shadow: 0 0 30px rgba(0,212,255,0.28);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-p:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,212,255,0.45); }
+    .btn-s {
+      background: var(--card); color: var(--text); padding: 0.85rem 2rem; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      border: 1px solid var(--border); transition: all 0.3s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-s:hover { border-color: rgba(0,212,255,0.5); color: var(--cyan); }
+    .hero-kpis {
+      display: flex; justify-content: center; gap: 3.5rem; margin-top: 4.5rem;
+      flex-wrap: wrap; padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .kpi-num { font-size: 2.4rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .kpi-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ===== SHARED LAYOUT ===== */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .sec-label {
+      display: inline-block; color: var(--cyan); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem;
+    }
+    .sec-title {
+      font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800; line-height: 1.2; margin-bottom: 1.2rem;
+    }
+    .sec-sub { color: var(--muted); font-size: 1.05rem; max-width: 640px; line-height: 1.75; }
+    .sec-head { text-align: center; margin-bottom: 4rem; }
+    .sec-head .sec-sub { margin: 0 auto; }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--bg2); }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .svc-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      padding: 2.25rem; transition: all 0.35s; position: relative; overflow: hidden;
+    }
+    .svc-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform 0.35s;
+    }
+    .svc-card:hover { transform: translateY(-5px); border-color: rgba(0,212,255,0.25); background: rgba(255,255,255,0.06); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon {
+      width: 52px; height: 52px; background: var(--grad); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: white; margin-bottom: 1.4rem;
+    }
+    .svc-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .svc-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.72; }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--bg); }
+    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 22px;
+      padding: 2.5rem; position: relative; overflow: hidden;
+    }
+    .about-glow {
+      position: absolute; width: 250px; height: 250px; top: -80px; right: -80px;
+      background: radial-gradient(circle, rgba(0,212,255,0.18) 0%, transparent 70%); pointer-events: none;
+    }
+    .stats2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .stat-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.3rem; text-align: center;
+    }
+    .stat-n { font-size: 1.9rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-l { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+    .check-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.9rem; }
+    .check-list li { display: flex; align-items: flex-start; gap: 0.7rem; color: var(--muted); font-size: 0.94rem; line-height: 1.5; }
+    .check-list li i { color: var(--green); font-size: 0.9rem; margin-top: 3px; flex-shrink: 0; }
+
+    /* ===== PROCESS ===== */
+    #process { background: var(--bg2); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 2rem; }
+    .step { text-align: center; padding: 2rem 1.5rem; }
+    .step-n {
+      width: 68px; height: 68px; background: var(--grad); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.55rem; font-weight: 800; color: white;
+      box-shadow: 0 0 35px rgba(0,212,255,0.3);
+    }
+    .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .step p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--bg); }
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .testi-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      padding: 2rem; transition: transform 0.3s;
+    }
+    .testi-card:hover { transform: translateY(-4px); }
+    .stars { color: #fbbf24; font-size: 0.95rem; margin-bottom: 1rem; letter-spacing: 2px; }
+    .testi-text { color: var(--muted); font-size: 0.93rem; line-height: 1.75; margin-bottom: 1.5rem; font-style: italic; }
+    .author { display: flex; align-items: center; gap: 0.85rem; }
+    .avatar {
+      width: 44px; height: 44px; background: var(--grad); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem; color: white; flex-shrink: 0;
+    }
+    .author-name { font-weight: 700; font-size: 0.9rem; }
+    .author-role { color: var(--muted); font-size: 0.8rem; margin-top: 1px; }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--bg2); }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4.5rem; }
+    .contact-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.55rem; font-weight: 700; margin-bottom: 1rem; }
+    .contact-info > p { color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+    .c-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+    .c-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.18);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--cyan);
+    }
+    .c-label { font-size: 0.78rem; color: var(--muted); }
+    .c-val { font-weight: 600; font-size: 0.95rem; margin-top: 1px; }
+    .form { display: grid; gap: 1.2rem; }
+    .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .fg { display: flex; flex-direction: column; gap: 0.45rem; }
+    .fg label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+    .fg input, .fg textarea, .fg select {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 0.8rem 1rem; color: var(--text); font-family: inherit; font-size: 0.93rem;
+      transition: border-color 0.3s; outline: none;
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: #3d5068; }
+    .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: rgba(0,212,255,0.5); }
+    .fg textarea { resize: vertical; min-height: 120px; }
+    .fg select { appearance: none; cursor: pointer; }
+    .fg select option { background: var(--bg2); }
+    .submit-btn {
+      background: var(--grad); color: white; border: none; padding: 0.9rem 2rem;
+      border-radius: 10px; font-size: 0.97rem; font-weight: 700; cursor: pointer;
+      transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-family: inherit;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 35px rgba(0,212,255,0.3); }
+    .form-success {
+      display: none; text-align: center; color: var(--green);
+      padding: 1.5rem; background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.25); border-radius: 12px; font-weight: 600;
+    }
+    .form-success i { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #030710; padding: 4rem 2rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .ft-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;
+    }
+    .ft-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-top: 1rem; max-width: 270px; }
+    .ft-socials { display: flex; gap: 0.65rem; margin-top: 1.5rem; }
+    .ft-soc {
+      width: 38px; height: 38px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: all 0.3s;
+    }
+    .ft-soc:hover { color: var(--cyan); border-color: rgba(0,212,255,0.4); }
+    .ft-col h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--text); }
+    .ft-col ul { list-style: none; }
+    .ft-col ul li { margin-bottom: 0.7rem; }
+    .ft-col ul li a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+    .ft-col ul li a:hover { color: var(--cyan); }
+    .ft-bottom {
+      max-width: 1200px; margin: 0 auto; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .ft-bottom p { color: var(--muted); font-size: 0.83rem; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fi { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fi.vis { opacity: 1; transform: translateY(0); }
+    .fi-d1 { transition-delay: 0.1s; }
+    .fi-d2 { transition-delay: 0.2s; }
+    .fi-d3 { transition-delay: 0.3s; }
+    .fi-d4 { transition-delay: 0.4s; }
+    .fi-d5 { transition-delay: 0.5s; }
+    .fi-d6 { transition-delay: 0.6s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: fixed;
+        top: 62px; left: 0; right: 0;
+        background: rgba(6,11,24,0.97); backdrop-filter: blur(24px);
+        padding: 2rem 2.5rem; gap: 1.75rem;
+        border-bottom: 1px solid var(--border); animation: fadeUp 0.3s ease;
+      }
+      .about-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .ft-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4.5rem 1.25rem; }
+      .hero-kpis { gap: 2rem; }
+      .form-row2 { grid-template-columns: 1fr; }
+      .ft-grid { grid-template-columns: 1fr; }
+      .ft-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">Sabomnim LLC</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="badge"><i class="fas fa-microchip"></i> Artificial Intelligence Consulting</div>
+    <h1>
+      Transform Your Business<br>
+      with <span class="grad-text">Intelligent</span> Solutions
+    </h1>
+    <p class="hero-desc">
+      We help organizations harness the full power of artificial intelligence —
+      from strategy and custom model development to deployment and continuous optimization.
+    </p>
+    <div class="cta-row">
+      <a href="#contact" class="btn-p"><i class="fas fa-rocket"></i> Start Your AI Journey</a>
+      <a href="#services" class="btn-s">Explore Services <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="hero-kpis">
+      <div><div class="kpi-num">50+</div><div class="kpi-label">Clients Served</div></div>
+      <div><div class="kpi-num">200+</div><div class="kpi-label">Projects Delivered</div></div>
+      <div><div class="kpi-num">95%</div><div class="kpi-label">Client Satisfaction</div></div>
+      <div><div class="kpi-num">5+</div><div class="kpi-label">Years Experience</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="sec-label">What We Offer</div>
+      <h2 class="sec-title">Comprehensive AI <span class="grad-text">Services</span></h2>
+      <p class="sec-sub">End-to-end AI consulting for businesses ready to lead in the intelligence era.</p>
+    </div>
+    <div class="grid-3">
+      <div class="svc-card fi fi-d1">
+        <div class="svc-icon"><i class="fas fa-brain"></i></div>
+        <h3>AI Strategy & Roadmap</h3>
+        <p>We assess your business and build a tailored AI roadmap that aligns cutting-edge technology with your strategic goals and budget.</p>
+      </div>
+      <div class="svc-card fi fi-d2">
+        <div class="svc-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Machine Learning Development</h3>
+        <p>Custom ML models trained on your data — from predictive analytics and classification to deep learning and neural network architectures.</p>
+      </div>
+      <div class="svc-card fi fi-d3">
+        <div class="svc-icon"><i class="fas fa-robot"></i></div>
+        <h3>Process Automation</h3>
+        <p>Eliminate repetitive tasks and slash operational costs by deploying intelligent automation across your critical business workflows.</p>
+      </div>
+      <div class="svc-card fi fi-d4">
+        <div class="svc-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Data Analytics & BI</h3>
+        <p>Transform raw data into actionable insights with AI-powered dashboards, reports, and business intelligence that drive better decisions.</p>
+      </div>
+      <div class="svc-card fi fi-d5">
+        <div class="svc-icon"><i class="fas fa-comments"></i></div>
+        <h3>Natural Language Processing</h3>
+        <p>Intelligent chatbots, document analysis, sentiment detection, and language models that understand and generate human communication.</p>
+      </div>
+      <div class="svc-card fi fi-d6">
+        <div class="svc-icon"><i class="fas fa-plug"></i></div>
+        <h3>AI Integration & Deployment</h3>
+        <p>Seamless integration of AI solutions into your existing tech stack with scalable, production-ready architectures and ongoing support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="fi">
+        <div class="about-card">
+          <div class="about-glow"></div>
+          <div class="sec-label">Our Expertise</div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:800;line-height:1.3;margin-bottom:1rem;">
+            Building the AI-powered businesses of tomorrow
+          </h3>
+          <p style="color:var(--muted);font-size:0.93rem;line-height:1.75;">
+            Our team combines deep expertise in computer science, data engineering, and business strategy
+            to deliver AI solutions that create real, measurable competitive advantage.
+          </p>
+          <div class="stats2">
+            <div class="stat-box"><div class="stat-n">50+</div><div class="stat-l">Enterprise Clients</div></div>
+            <div class="stat-box"><div class="stat-n">200+</div><div class="stat-l">AI Projects</div></div>
+            <div class="stat-box"><div class="stat-n">40%</div><div class="stat-l">Avg. Cost Reduction</div></div>
+            <div class="stat-box"><div class="stat-n">3×</div><div class="stat-l">Average ROI</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fi fi-d2">
+        <div class="sec-label">About Us</div>
+        <h2 class="sec-title">Why Choose <span class="grad-text">Sabomnim</span></h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1.25rem;">
+          Sabomnim LLC was founded with one mission: to make powerful artificial intelligence
+          accessible to businesses of every size. Our consultants bring decades of combined
+          experience from top-tier tech companies and research institutions.
+        </p>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1.5rem;">
+          We don't just deliver technology — we deliver transformation. Every engagement
+          begins with a deep understanding of your unique challenges and ends with
+          measurable, lasting outcomes.
+        </p>
+        <ul class="check-list">
+          <li><i class="fas fa-check-circle"></i> Expert team with advanced degrees and industry-leading experience in AI/ML</li>
+          <li><i class="fas fa-check-circle"></i> Proven methodology refined across 200+ successful deployments</li>
+          <li><i class="fas fa-check-circle"></i> Agile approach with full transparency and regular progress updates</li>
+          <li><i class="fas fa-check-circle"></i> Ongoing optimization and support long after launch</li>
+          <li><i class="fas fa-check-circle"></i> Deep vertical expertise: finance, healthcare, retail, logistics, and more</li>
+        </ul>
+        <a href="#contact" class="btn-p" style="margin-top:2.5rem;width:fit-content;">
+          Work With Us <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="sec-label">How We Work</div>
+      <h2 class="sec-title">Our Proven <span class="grad-text">4-Step Process</span></h2>
+      <p class="sec-sub">A structured, transparent approach ensuring every AI initiative delivers — on time and on budget.</p>
+    </div>
+    <div class="steps">
+      <div class="step fi fi-d1">
+        <div class="step-n">01</div>
+        <h3>Discovery & Assessment</h3>
+        <p>We analyze your business processes, data landscape, and goals to identify the highest-impact AI opportunities.</p>
+      </div>
+      <div class="step fi fi-d2">
+        <div class="step-n">02</div>
+        <h3>Strategy & Planning</h3>
+        <p>We build a clear AI roadmap with defined milestones, resource requirements, and measurable success criteria.</p>
+      </div>
+      <div class="step fi fi-d3">
+        <div class="step-n">03</div>
+        <h3>Development & Testing</h3>
+        <p>Our engineers build, train, and rigorously validate AI models and systems using best-in-class tools.</p>
+      </div>
+      <div class="step fi fi-d4">
+        <div class="step-n">04</div>
+        <h3>Deploy & Optimize</h3>
+        <p>We launch to production, monitor performance, and continuously improve to maximize long-term value.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="sec-label">Client Stories</div>
+      <h2 class="sec-title">Trusted by <span class="grad-text">Industry Leaders</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fi fi-d1">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Sabomnim transformed our entire supply chain. Their AI-powered demand forecasting reduced inventory costs by 35% in just six months. Truly exceptional partnership."</p>
+        <div class="author">
+          <div class="avatar">MR</div>
+          <div>
+            <div class="author-name">Michael Rodriguez</div>
+            <div class="author-role">COO, RetailTech Inc.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fi fi-d2">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"The NLP chatbot they built handles 80% of customer inquiries automatically. Our support team now focuses on complex cases that actually need human attention."</p>
+        <div class="author">
+          <div class="avatar">SK</div>
+          <div>
+            <div class="author-name">Sarah Kim</div>
+            <div class="author-role">VP Operations, FinServe Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fi fi-d3">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"From strategy to deployment, Sabomnim was professional, knowledgeable, and genuinely invested in our success. The ROI exceeded all expectations."</p>
+        <div class="author">
+          <div class="avatar">JT</div>
+          <div>
+            <div class="author-name">James Thompson</div>
+            <div class="author-role">CEO, MedAnalytics Corp.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head fi">
+      <div class="sec-label">Get In Touch</div>
+      <h2 class="sec-title">Ready to <span class="grad-text">Get Started?</span></h2>
+      <p class="sec-sub">Tell us about your project and we'll reach out within 24 hours with a personalized consultation plan.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="fi">
+        <div class="contact-info">
+          <h3>Let's Build Something Intelligent</h3>
+          <p>Whether you're exploring AI for the first time or scaling an existing initiative, we're here to guide you every step of the way.</p>
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-envelope"></i></div>
+            <div><div class="c-label">Email</div><div class="c-val">info@sabomnim.com</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-phone"></i></div>
+            <div><div class="c-label">Phone</div><div class="c-val">Available upon request</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-clock"></i></div>
+            <div><div class="c-label">Response Time</div><div class="c-val">Within 24 hours</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><i class="fas fa-globe"></i></div>
+            <div><div class="c-label">Service Area</div><div class="c-val">Worldwide — Remote & On-site</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fi fi-d2">
+        <form class="form" id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row2">
+            <div class="fg"><label>First Name</label><input type="text" placeholder="John" required></div>
+            <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe" required></div>
+          </div>
+          <div class="form-row2">
+            <div class="fg"><label>Email</label><input type="email" placeholder="john@company.com" required></div>
+            <div class="fg"><label>Company</label><input type="text" placeholder="Your Company"></div>
+          </div>
+          <div class="fg">
+            <label>Service of Interest</label>
+            <select>
+              <option>AI Strategy & Roadmap</option>
+              <option>Machine Learning Development</option>
+              <option>Process Automation</option>
+              <option>Data Analytics & BI</option>
+              <option>Natural Language Processing</option>
+              <option>AI Integration & Deployment</option>
+              <option>Other / Not Sure Yet</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Tell us about your project</label>
+            <textarea placeholder="Describe your goals, challenges, and what you're hoping to achieve with AI..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle"></i>
+            Thank you! We'll be in touch within 24 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <div class="logo" style="font-size:1.4rem;">Sabomnim LLC</div>
+      <p>Empowering businesses with intelligent AI solutions. Transforming data into decisions and challenges into competitive advantages.</p>
+      <div class="ft-socials">
+        <a href="#" class="ft-soc" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="ft-soc" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="ft-soc" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">AI Strategy</a></li>
+        <li><a href="#services">Machine Learning</a></li>
+        <li><a href="#services">Process Automation</a></li>
+        <li><a href="#services">Data Analytics</a></li>
+        <li><a href="#services">NLP Solutions</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#testimonials">Case Studies</a></li>
+        <li><a href="#contact">Careers</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Industries</h4>
+      <ul>
+        <li><a href="#">Healthcare</a></li>
+        <li><a href="#">Finance</a></li>
+        <li><a href="#">Retail</a></li>
+        <li><a href="#">Manufacturing</a></li>
+        <li><a href="#">Technology</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2024 Sabomnim LLC. All rights reserved.</p>
+    <p>Privacy Policy &nbsp;·&nbsp; Terms of Service</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  document.getElementById('burger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    var form = document.getElementById('contactForm');
+    var success = document.getElementById('formSuccess');
+    Array.from(form.children).forEach(function(child) {
+      if (child.id !== 'formSuccess') child.style.display = 'none';
+    });
+    success.style.display = 'block';
+  }
+
+  // Scroll animations
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('vis'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fi').forEach(function(el) { observer.observe(el); });
+
+  // Navbar opacity on scroll
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('navbar');
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(6,11,24,0.96)'
+      : 'rgba(6,11,24,0.7)';
+  });
+</script>
+</body>
+</html>
