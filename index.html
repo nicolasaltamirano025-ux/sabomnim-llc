@@ -51,6 +51,8 @@
     }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+    .lang-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 0.42rem 0.9rem; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; font-family: inherit; letter-spacing: 0.05em; transition: all 0.3s; }
+    .lang-btn:hover { border-color: var(--cyan); color: var(--cyan); }
 
     /* ===== HERO ===== */
     #hero {
@@ -325,9 +327,12 @@
     <li><a href="#testimonials">Testimonials</a></li>
     <li><a href="#contact" class="nav-cta">Get Started</a></li>
   </ul>
-  <button class="hamburger" id="burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <button id="langBtn" onclick="toggleLang()" class="lang-btn" aria-label="Switch language">ES</button>
+    <button class="hamburger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -683,6 +688,86 @@
       ? 'rgba(6,11,24,0.96)'
       : 'rgba(6,11,24,0.7)';
   });
+</script>
+<script>
+var T=[
+['.nav-links a',0,'Servicios'],['.nav-links a',1,'Nosotros'],['.nav-links a',2,'Proceso'],
+['.nav-links a',3,'Testimonios'],['.nav-links a',4,'Comenzar'],
+['.badge',0,'<i class="fas fa-microchip"></i> Consultoría en Inteligencia Artificial'],
+['#hero h1',0,'Transforma tu Empresa<br>con Soluciones <span class="grad-text">Inteligentes</span>'],
+['.hero-desc',0,'Ayudamos a organizaciones de toda Latinoamérica a aprovechar todo el poder de la inteligencia artificial — desde estrategia y desarrollo de modelos hasta despliegue y optimización continua.'],
+['#hero .btn-p',0,'<i class="fas fa-rocket"></i> Inicia tu Viaje con IA'],
+['#hero .btn-s',0,'Ver Servicios <i class="fas fa-arrow-right"></i>'],
+['.kpi-label',0,'Clientes Atendidos'],['.kpi-label',1,'Proyectos Entregados'],
+['.kpi-label',2,'Satisfacción del Cliente'],['.kpi-label',3,'Año de Fundación'],
+['#services .sec-label',0,'Lo Que Ofrecemos'],
+['#services .sec-title',0,'Servicios de IA <span class="grad-text">Completos</span>'],
+['#services .sec-sub',0,'Consultoría de IA integral para empresas listas para liderar en la era de la inteligencia.'],
+['.svc-card h3',0,'Estrategia y Hoja de Ruta de IA'],
+['.svc-card p',0,'Evaluamos tu negocio y construimos una hoja de ruta personalizada que alinea la tecnología de vanguardia con tus objetivos estratégicos y presupuesto.'],
+['.svc-card h3',1,'Desarrollo de Machine Learning'],
+['.svc-card p',1,'Modelos de ML personalizados entrenados con tus datos — desde analítica predictiva y clasificación hasta deep learning y redes neuronales.'],
+['.svc-card h3',2,'Automatización de Procesos'],
+['.svc-card p',2,'Elimina tareas repetitivas y reduce costos operativos desplegando automatización inteligente en los flujos de trabajo críticos de tu empresa.'],
+['.svc-card h3',3,'Analítica de Datos e BI'],
+['.svc-card p',3,'Transforma datos brutos en insights accionables con dashboards de analítica impulsados por IA y soluciones de inteligencia de negocio.'],
+['.svc-card h3',4,'Procesamiento de Lenguaje Natural'],
+['.svc-card p',4,'Chatbots inteligentes, análisis de documentos, detección de sentimientos y modelos de lenguaje que entienden y generan comunicación humana.'],
+['.svc-card h3',5,'Integración y Despliegue de IA'],
+['.svc-card p',5,'Integración fluida de soluciones de IA en tu stack tecnológico existente con arquitecturas escalables, listas para producción y soporte continuo.'],
+['.about-card .sec-label',0,'Nuestra Experiencia'],
+['.about-card h3',0,'Construyendo los negocios con IA del mañana'],
+['.about-card p',0,'Nuestro equipo combina profunda experiencia en ciencias de la computación, ingeniería de datos y estrategia empresarial para entregar soluciones de IA con ventaja competitiva real y medible.'],
+['.stat-l',0,'Clientes Empresariales'],['.stat-l',1,'Proyectos de IA'],
+['.stat-l',2,'Reducción de Costos Prom.'],['.stat-l',3,'ROI Promedio'],
+['#about .fi-d2 .sec-label',0,'Sobre Nosotros'],
+['#about .sec-title',0,'¿Por Qué Elegir <span class="grad-text">Sabomnim</span>?'],
+['#about .fi-d2 p',0,'Fundada en 2022, Sabomnim LLC surgió de años de trabajo independiente en consultoría de IA. Antes de formalizarse como empresa, nuestros fundadores ya entregaban proyectos de IA como profesionales independientes — llevando esa experiencia real a cada cliente. Tenemos conocimiento profundo de los mercados latinoamericanos y sus oportunidades únicas.'],
+['#about .fi-d2 p',1,'No solo entregamos tecnología — entregamos transformación. Cada proyecto comienza con una comprensión profunda de tus desafíos únicos y termina con resultados medibles y duraderos.'],
+['.check-list li',0,'<i class="fas fa-check-circle"></i> Equipo experto con posgrados y experiencia líder en IA/ML'],
+['.check-list li',1,'<i class="fas fa-check-circle"></i> Metodología probada en más de 45 despliegues exitosos'],
+['.check-list li',2,'<i class="fas fa-check-circle"></i> Enfoque ágil con transparencia total y actualizaciones regulares'],
+['.check-list li',3,'<i class="fas fa-check-circle"></i> Optimización y soporte continuo después del lanzamiento'],
+['.check-list li',4,'<i class="fas fa-check-circle"></i> Experiencia vertical profunda: finanzas, salud, retail, logística y más'],
+['#about .btn-p',0,'Trabaja Con Nosotros <i class="fas fa-arrow-right"></i>'],
+['#process .sec-label',0,'Cómo Trabajamos'],
+['#process .sec-title',0,'Nuestro Proceso <span class="grad-text">Probado en 4 Pasos</span>'],
+['#process .sec-sub',0,'Un enfoque estructurado y transparente que garantiza que cada iniciativa de IA cumpla — a tiempo y dentro del presupuesto.'],
+['.step h3',0,'Descubrimiento y Evaluación'],['.step p',0,'Analizamos tus procesos, datos y objetivos para identificar las oportunidades de IA de mayor impacto.'],
+['.step h3',1,'Estrategia y Planificación'],['.step p',1,'Construimos una hoja de ruta clara con hitos definidos, recursos requeridos y criterios de éxito medibles.'],
+['.step h3',2,'Desarrollo y Pruebas'],['.step p',2,'Nuestros ingenieros construyen, entrenan y validan rigurosamente modelos y sistemas de IA con herramientas de clase mundial.'],
+['.step h3',3,'Despliegue y Optimización'],['.step p',3,'Lanzamos a producción, monitoreamos el rendimiento y mejoramos continuamente para maximizar el valor a largo plazo.'],
+['#testimonials .sec-label',0,'Historias de Clientes'],
+['#testimonials .sec-title',0,'La Confianza de <span class="grad-text">Líderes del Sector</span>'],
+['#contact .sec-label',0,'Contáctanos'],
+['#contact .sec-title',0,'¿Listo para <span class="grad-text">Comenzar?</span>'],
+['#contact .sec-sub',0,'Cuéntanos sobre tu proyecto y nos comunicaremos en 24 horas con un plan de consultoría personalizado.'],
+['.contact-info h3',0,'Construyamos Algo Inteligente'],
+['.contact-info > p',0,'Ya sea que explores la IA por primera vez o escales una iniciativa existente, estamos aquí para guiarte. Atendemos empresas en Guatemala, Colombia, México, Brasil, Costa Rica y toda Latinoamérica.'],
+['.c-label',0,'Correo Electrónico'],['.c-label',1,'Teléfono'],
+['.c-label',2,'Tiempo de Respuesta'],['.c-val',2,'En menos de 24 horas'],['.c-label',3,'Área de Servicio'],
+['label',0,'Nombre'],['label',1,'Apellido'],['label',2,'Correo Electrónico'],
+['label',3,'Empresa'],['label',4,'Servicio de Interés'],['label',5,'Cuéntanos sobre tu proyecto'],
+['.submit-btn',0,'<i class="fas fa-paper-plane"></i> Enviar Mensaje'],
+['#formSuccess',0,'<i class="fas fa-check-circle"></i> ¡Gracias! Nos pondremos en contacto en menos de 24 horas.'],
+['.ft-brand p',0,'Empoderando empresas con soluciones inteligentes de IA. Transformando datos en decisiones y desafíos en ventajas competitivas.'],
+['.ft-col h4',0,'Servicios'],['.ft-col h4',1,'Empresa'],['.ft-col h4',2,'Industrias'],
+['.ft-col ul li a',0,'Estrategia de IA'],['.ft-col ul li a',1,'Machine Learning'],
+['.ft-col ul li a',2,'Automatización de Procesos'],['.ft-col ul li a',3,'Analítica de Datos'],['.ft-col ul li a',4,'Soluciones de NLP'],
+['.ft-col ul li a',5,'Nosotros'],['.ft-col ul li a',6,'Nuestro Proceso'],['.ft-col ul li a',7,'Casos de Éxito'],['.ft-col ul li a',8,'Carreras'],['.ft-col ul li a',9,'Contacto'],
+['.ft-col ul li a',10,'Salud'],['.ft-col ul li a',11,'Finanzas'],['.ft-col ul li a',12,'Retail'],['.ft-col ul li a',13,'Manufactura'],['.ft-col ul li a',14,'Tecnología'],
+['.ft-bottom p',0,'© 2024 Sabomnim LLC. Todos los derechos reservados.'],
+['.ft-bottom p',1,'Política de Privacidad  ·  Términos de Servicio']
+];
+var _c={};
+function _el(s,i){return document.querySelectorAll(s)[i]||null;}
+function _apply(l){
+  T.forEach(function(t,i){var e=_el(t[0],t[1]);if(!e)return;if(!_c[i])_c[i]=e.innerHTML;e.innerHTML=l==='es'?t[2]:_c[i];});
+  var b=document.getElementById('langBtn');if(b)b.textContent=l==='es'?'EN':'ES';
+  try{localStorage.setItem('slang',l);}catch(x){}
+}
+function toggleLang(){try{_apply(localStorage.getItem('slang')==='es'?'en':'es');}catch(x){_apply('en');}}
+try{if(localStorage.getItem('slang')==='es')_apply('es');}catch(x){}
 </script>
 </body>
 </html>
